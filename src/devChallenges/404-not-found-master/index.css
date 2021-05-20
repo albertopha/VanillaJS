@@ -1,0 +1,75 @@
+*,
+*::before,
+*::after {
+  font-family: monospace;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-color: #333333;
+}
+
+body {
+  margin: 0;
+}
+
+body:is(header,h2,p) {
+  color: var(--font-color);
+}
+
+header {
+  padding: 1.5rem;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 100px 0;
+}
+
+main > div {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+div h2 {
+  font-weight: bold;
+  font-size: 64px;
+}
+
+div img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+div > p {
+  font-size: 24px;
+}
+
+div > button {
+  height: 68px;
+  width: 216px;
+  background: var(--font-color);
+  color: #FFF;
+  cursor: jjjjjinter;
+}
+
+footer {
+  width: 100%;
+  font-size: 14px;
+  text-align: center;;
+}
+
+@media only screen and (max-width: 600px) {
+  main {
+    display: block;
+  }
+  main > div {
+    width: 100%;
+  }
+}
