@@ -1,0 +1,165 @@
+*,
+*::before,
+*::after {
+  font-family: "Poppins", sans-serif;
+  color: #FFF;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #181719;
+}
+
+button {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.nav {
+  width: 100%;
+  padding: 1rem 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.nav > button {
+  width: 102px;
+  height: 32px;
+  border: 1px solid #FFFFFF;
+}
+
+.menu-group {
+  min-width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.menu-group > a {
+  cursor: pointer;
+}
+
+.menu-group > a:hover {
+  border-bottom: 2px solid #FFF;
+}
+
+main {
+  padding: 1rem 5rem;
+  display: flex;
+  margin-bottom: 230px;
+}
+
+.header {
+  width: 40%;
+}
+
+.content {
+  width: 60%;
+}
+
+.content {
+  position: relative;
+  max-width: 700px;
+  max-height: 500px;
+}
+
+.content > img {
+  width: 100%;
+  height: 100%;
+}
+
+.card {
+  width: 410px;
+  height: 190px;
+  background: #181719;
+  position: absolute;
+  bottom: -90px;
+  left: 35%;
+  padding: 1rem 5rem 1rem 3rem;
+}
+
+.card-header {
+  display: flex;
+}
+
+.card-header > img {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+.card-body {
+  font-family: Lora;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.hamburger-menu-btn {
+  display: none;
+  fill: #FFF;
+}
+
+#close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.hamburger-menus {
+  display: none;
+  position: fixed;
+  z-index: 99;
+  height: 100%;
+  width: 100%;
+  background: #181719;
+}
+
+.hamburger-menus.active {
+  display: block;
+}
+
+.hamburger-menus .menu-items {
+  padding: 10rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#close:hover {
+  opacity: 50%;
+}
+
+footer {
+  text-align: center;
+}
+
+@media screen and (max-width: 600px)  {
+  main {
+    display: block;
+  }
+
+  .header,.content {
+    width: 100%;
+  }
+
+  .card {
+    width: 300px;
+    height: 190px;
+  }
+
+  .menu-group {
+    display: none;
+  }
+
+  .hamburger-menu-btn {
+    display: block;
+    cursor: pointer;
+  }
+}
