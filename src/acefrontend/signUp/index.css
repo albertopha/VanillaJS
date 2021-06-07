@@ -1,0 +1,38 @@
+*,
+*::before,
+*::after {
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+}
+
+.modal {
+  min-width: 300px;
+  min-height: 300px;
+  padding: 1rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#sign-up section {
+  margin-bottom: 8px;
+}
+
+#sign-up section input {
+  display: block;
+}
+
+.invalid li {
+  display: none;
+  color: red;
+}
+
+.invalid .active {
+  display: list-item;
+}
