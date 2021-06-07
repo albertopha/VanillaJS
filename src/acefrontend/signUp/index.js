@@ -86,12 +86,10 @@ function validatePassword(pwInput) {
 }
 
 function validateConfirm(pwInput) {
-  console.log(state);
   if (pwInput.length > 0 &&
       pwInput !== state.password.value) {
     invalidConfirm.classList.add("active");
   } else {
-    console.log("******** state = ", state);
     invalidConfirm.classList.remove("active");
   }
 }
