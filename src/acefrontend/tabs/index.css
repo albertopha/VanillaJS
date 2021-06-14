@@ -1,0 +1,64 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+root {
+  --tab-height: 50px;
+}
+
+body {
+  margin: 0;
+}
+
+.tab-group {
+  height: 300px;
+  width: 500px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+button {
+  border: 0;
+  background: transparent;
+  outline: none;
+}
+
+.tabs {
+  width: 100%;
+  height: var(--tab-height, 50px);
+}
+
+.tabs > button {
+  height: 100%;
+  width: 100px;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  cursor: pointer;
+}
+
+.tabs > button:first-of-type {
+  border-left: 1px solid black;
+  border-top-left-radius: 1rem;
+}
+
+.tabs > button:last-of-type {
+  border-top-right-radius: 1rem;
+}
+
+.tabs > button:hover {
+  background-color: #e0e0e0;
+}
+
+.content {
+  width: 100%;
+  height: calc(100% - var(--tab-height, 50px));
+  padding: 1rem;
+  border: 1px solid black;
+  border-top-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
