@@ -1,0 +1,75 @@
+body {
+	margin: 0;
+	padding: 1rem;
+	font-family: 'Courier New', Courier, monospace;
+}
+
+:root {
+	--hot-pink: rgb(245, 125, 145);
+}
+
+.tile {
+	padding: 1rem;
+	margin-bottom: 1.5rem;
+	border: 3px solid var(--hot-pink);
+}
+
+.tile.header {
+	padding: 0;
+	border: 0;
+}
+
+.tile.header header {
+	padding: 12px;
+	text-align: center;
+	min-height: 48px;
+	font-size: 18px;
+	font-weight: bolder;
+	color: white;
+	box-sizing: border-box;
+	background: var(--hot-pink);
+}
+
+.tile.header:last-child header {
+	background: lightblue;
+}
+
+.tile.header form {
+	/* border: 3px solid var(--hot-pink); */
+}
+
+.tile.header:last-child form {
+	/* border-color: lightblue; */
+}
+
+.tile label {
+	margin-bottom: 0.32rem;
+	font-weight: bolder;
+	font-size: 18px;
+}
+
+.tile input,textarea {
+	min-width: 100%;
+	margin-bottom: 1rem;
+}
+
+.tile textarea {
+	min-height: 100px;
+}
+
+.tile form {
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+}
+
+.tile button {
+	height: 40px;
+	width: 150px;
+	font-size: 16px;
+	background-color: var(--hot-pink);
+	outline: none;
+	border: 0;
+	color: white;
+	cursor: pointer;
+}
