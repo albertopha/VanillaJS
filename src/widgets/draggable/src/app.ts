@@ -45,12 +45,15 @@ function onDrag(event: Event) {
 	if (!store.isDraggable) {
 		store.isDraggable = true;
 	}
+
+	console.log(event);
 }
 
 function onStopDrag(event: Event) {
 	if (store.isDraggable) {
 		store.isDraggable = false;
 	}
+	console.log(event);
 }
 
 function onAddProject(event: Event) {
