@@ -1,2 +1,2 @@
 # VanillaJS
-Playing with vanillaJS for fun!
+Playing with vanillaJS and TS for fun!
