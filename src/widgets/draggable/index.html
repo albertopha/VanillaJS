@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="./src/app.css">
 	<title>Understanding TypeScript</title>
+	<script type="module" src="dist/card.js" defer></script>
   <script src="dist/app.js" defer></script>
 </head>
 <body>
@@ -17,16 +18,18 @@
 			<textarea id="description" name="description"></textarea>
 			<label for="people">People</label>
 			<input id="people" name="people" type="number" required>
-			<button id="add-project-btn">ADD PROJECT</button>
+			<button id="add-project-btn" type="submit">ADD PROJECT</button>
 		</form>
 	</section>
-	<section class="tile header">
-		<header>ACTIVE PROJECTS</header>
-		<form id="active-projects"></form>
-	</section>
-	<section class="tile header">
-		<header>FINISHED PROJECTS</header>
-		<form id="finished-projects"></form>
+	<section class="draggable-container">
+		<section class="tile header">
+			<header>ACTIVE PROJECTS</header>
+			<form id="active-projects"></form>
+		</section>
+		<section class="tile header">
+			<header>FINISHED PROJECTS</header>
+			<form id="finished-projects"></form>
+		</section>
 	</section>
 </body>
 </html>
