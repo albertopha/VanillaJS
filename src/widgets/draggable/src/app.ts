@@ -11,8 +11,20 @@ interface Store {
 	project: Project,
 	activeProjects: Project[],
 	finishedProjects: Project[],
-	isDraggable: boolean
 };
+
+interface DragTarget {
+	startX: number,
+	startY: number,
+	top: number,
+	left: number,
+	element: HTMLElement | null
+};
+
+interface Draggable {
+	isDraggable: boolean,
+	dragTarget: DragTarget
+}
 
 /*******************************
  *            Store            *
@@ -25,12 +37,23 @@ const store: Store = {
 	},
 	activeProjects: [],
 	finishedProjects: [],
-	isDraggable: false
 };
+
+const draggable: Draggable  = {
+	isDraggable: false,
+	dragTarget: {
+		startX: -1,
+		startY: -1,
+		top: -1,
+		left: -1,
+		element: null
+	}
+}
 
 /*******************************
  *         Elements            *
  *******************************/
+const draggableContainer = document.querySelector(".draggable-container");
 const addProjectForm = document.getElementById("add-project-form")!;
 const activeProjectForm = document.getElementById("active-projects")!;
 const title = addProjectForm.querySelector("#title")!;
@@ -38,17 +61,16 @@ const title = addProjectForm.querySelector("#title")!;
 /*******************************
  *         Listeners           *
  *******************************/
-// document.addEventListener("mousedown", onDrag);
-// document.addEventListener("mousemove", onDrag);
-// document.addEventListener("mouseup", onStopDrag);
+document.addEventListener("mousemove", onDrag);
+document.addEventListener("mouseup", onStopDrag);
 addProjectForm.addEventListener("submit", onAddProject);
 addProjectForm.addEventListener("input", onChangeInput);
-
+activeProjectForm.addEventListener("mousedown", onMouseDown);
 
 /*******************************
  *       Event callbacks       *
  *******************************/
-function onAddProject(event: Event) {
+function onAddProject(event: Event): void {
 	event.preventDefault();
 	const newProject = Object.assign({}, store.project);
 	store.activeProjects.push(newProject);
@@ -56,22 +78,53 @@ function onAddProject(event: Event) {
 	resetForm();
 }
 
-// function onDrag(event: Event) {
-// 	if (!store.isDraggable) {
-// 		store.isDraggable = true;
-// 	}
-// 	console.log(event);
-// }
+function onMouseDown(event: MouseEvent): void {
+	if (!event || !event.target) {
+		return;
+	}
 
-// function onStopDrag(event: Event) {
-// 	if (store.isDraggable) {
-// 		store.isDraggable = false;
-// 	}
-// 	console.log(event);
-// }
+	draggable.dragTarget.element = event.target as HTMLElement;
+	draggable.isDraggable = true;
+	draggable.dragTarget.left = draggable.dragTarget.element.offsetLeft;
+	draggable.dragTarget.top = draggable.dragTarget.element.offsetTop;
+	draggable.dragTarget.startX = event.pageX;
+	draggable.dragTarget.startY = event.pageY;
+}
 
+function onDrag(event: MouseEvent): void {
+	const {
+		left,
+		top,
+		startX,
+		startY,
+		element
+	} = draggable.dragTarget;
 
-function onChangeInput(event: Event) {
+	if (
+		!draggable.isDraggable ||
+		!element
+	) {
+		return;
+	}
+
+	element.style.left = String(left + event.pageX - startX) + "px";
+	element.style.top= String(top + event.pageY - startY) + "px";
+}
+
+function onStopDrag(): void {
+	if (draggable.isDraggable) {
+		draggable.isDraggable = false;
+		draggable.dragTarget = {
+			startX: -1,
+			startY: -1,
+			top: -1,
+			left: -1,
+			element: null
+		}
+	}
+}
+
+function onChangeInput(event: Event): void {
 	if (event && event.target) {
 		const id = (<HTMLInputElement>event.target).id!;
 		const value = (<HTMLInputElement>event.target).value!;

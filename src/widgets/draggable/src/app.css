@@ -73,3 +73,13 @@ body {
 	color: white;
 	cursor: pointer;
 }
+
+.draggable-container {
+	position: relative;
+}
+
+project-card {
+	position: relative;
+	background: lightpink;
+	cursor: pointer;
+}

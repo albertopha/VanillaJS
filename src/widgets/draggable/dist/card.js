@@ -6,6 +6,7 @@ class Card extends HTMLElement {
         this.template.innerHTML = `
 			<style>
 				section {
+					padding: 1rem;
 					border: 2px solid black;
 				}
 			</style>
