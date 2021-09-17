@@ -1,4 +1,6 @@
-// Interfaces
+/*******************************
+ *         Interface           *
+ *******************************/
 interface Project {
 	title: string,
 	description: string,
@@ -12,7 +14,9 @@ interface Store {
 	isDraggable: boolean
 };
 
-// Store
+/*******************************
+ *            Store            *
+ *******************************/
 const store: Store = {
 	project: {
 		title: "",
@@ -24,42 +28,48 @@ const store: Store = {
 	isDraggable: false
 };
 
-// Elements
-const addProjectForm = document.querySelector("#add-project-form")!;
+/*******************************
+ *         Elements            *
+ *******************************/
+const addProjectForm = document.getElementById("add-project-form")!;
+const activeProjectForm = document.getElementById("active-projects")!;
 const title = addProjectForm.querySelector("#title")!;
-// const description = addProjectForm.querySelector("#description")!;
-// const people = addProjectForm.querySelector("#people")!;
-// const addProjectBtn = addProjectForm.querySelector("#add-project-btn")!;
 
-// Event listeners
-document.addEventListener("mousedown", onDrag);
-document.addEventListener("mousemove", onDrag);
-document.addEventListener("mouseup", onStopDrag);
+/*******************************
+ *         Listeners           *
+ *******************************/
+// document.addEventListener("mousedown", onDrag);
+// document.addEventListener("mousemove", onDrag);
+// document.addEventListener("mouseup", onStopDrag);
 addProjectForm.addEventListener("submit", onAddProject);
 addProjectForm.addEventListener("input", onChangeInput);
 
-// Utility functions
 
-// Event functions
-function onDrag(event: Event) {
-	if (!store.isDraggable) {
-		store.isDraggable = true;
-	}
-
-	console.log(event);
-}
-
-function onStopDrag(event: Event) {
-	if (store.isDraggable) {
-		store.isDraggable = false;
-	}
-	console.log(event);
-}
-
+/*******************************
+ *       Event callbacks       *
+ *******************************/
 function onAddProject(event: Event) {
 	event.preventDefault();
-	console.log("** event == ", event);
+	const newProject = Object.assign({}, store.project);
+	store.activeProjects.push(newProject);
+	displayActiveProject(newProject);
+	resetForm();
 }
+
+// function onDrag(event: Event) {
+// 	if (!store.isDraggable) {
+// 		store.isDraggable = true;
+// 	}
+// 	console.log(event);
+// }
+
+// function onStopDrag(event: Event) {
+// 	if (store.isDraggable) {
+// 		store.isDraggable = false;
+// 	}
+// 	console.log(event);
+// }
+
 
 function onChangeInput(event: Event) {
 	if (event && event.target) {
@@ -82,4 +92,50 @@ function onChangeInput(event: Event) {
 	}
 }
 
-// Execution
+
+/*******************************
+ *       Utility functions     *
+ *******************************/
+function displayActiveProject(project: Project): void {
+	const {
+		title,
+		description,
+		people
+	} = project;
+	const card = document.createElement("project-card");
+	const titleElem = document.createElement("h3");
+	const descriptionElem = document.createElement("div");
+	const peopleElem = document.createElement("div");
+
+	titleElem.textContent = title;
+	titleElem.setAttribute("slot", "title");
+
+	descriptionElem.textContent = description;
+	descriptionElem.setAttribute("slot", "description");
+
+	peopleElem.textContent = String(people);
+	peopleElem.setAttribute("slot", "people");
+
+	card.appendChild(titleElem);
+	card.appendChild(descriptionElem);
+	card.appendChild(peopleElem);
+
+	activeProjectForm.appendChild(card);
+}
+
+function resetForm(): void {
+	// Reset the project state
+	store.project = {
+		title: "",
+		description: "",
+		people: 0
+	};
+
+	// Reset inputs
+	(<HTMLFormElement> addProjectForm).reset();
+}
+
+
+/*******************************
+ *          Execution          *
+ *******************************/

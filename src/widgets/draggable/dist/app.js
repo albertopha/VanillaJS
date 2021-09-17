@@ -11,28 +11,17 @@ const store = {
     finishedProjects: [],
     isDraggable: false
 };
-const addProjectForm = document.querySelector("#add-project-form");
+const addProjectForm = document.getElementById("add-project-form");
+const activeProjectForm = document.getElementById("active-projects");
 const title = addProjectForm.querySelector("#title");
-document.addEventListener("mousedown", onDrag);
-document.addEventListener("mousemove", onDrag);
-document.addEventListener("mouseup", onStopDrag);
 addProjectForm.addEventListener("submit", onAddProject);
 addProjectForm.addEventListener("input", onChangeInput);
-function onDrag(event) {
-    if (!store.isDraggable) {
-        store.isDraggable = true;
-    }
-    console.log(event);
-}
-function onStopDrag(event) {
-    if (store.isDraggable) {
-        store.isDraggable = false;
-    }
-    console.log(event);
-}
 function onAddProject(event) {
     event.preventDefault();
-    console.log("** event == ", event);
+    const newProject = Object.assign({}, store.project);
+    store.activeProjects.push(newProject);
+    displayActiveProject(newProject);
+    resetForm();
 }
 function onChangeInput(event) {
     if (event && event.target) {
@@ -52,5 +41,30 @@ function onChangeInput(event) {
                 break;
         }
     }
+}
+function displayActiveProject(project) {
+    const { title, description, people } = project;
+    const card = document.createElement("project-card");
+    const titleElem = document.createElement("h3");
+    const descriptionElem = document.createElement("div");
+    const peopleElem = document.createElement("div");
+    titleElem.textContent = title;
+    titleElem.setAttribute("slot", "title");
+    descriptionElem.textContent = description;
+    descriptionElem.setAttribute("slot", "description");
+    peopleElem.textContent = String(people);
+    peopleElem.setAttribute("slot", "people");
+    card.appendChild(titleElem);
+    card.appendChild(descriptionElem);
+    card.appendChild(peopleElem);
+    activeProjectForm.appendChild(card);
+}
+function resetForm() {
+    store.project = {
+        title: "",
+        description: "",
+        people: 0
+    };
+    addProjectForm.reset();
 }
 //# sourceMappingURL=app.js.map
